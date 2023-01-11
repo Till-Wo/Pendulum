@@ -1,30 +1,31 @@
 #include <AFMotor.h>
+//This is just a test to see if the setup works
 
-AF_DCMotor motor(1, MOTOR12_64KHZ); // create motor #2, 64KHz pwm
+AF_DCMotor motor(1, MOTOR12_64KHZ); 
 
 void setup() {
-  Serial.begin(9600);           // set up Serial library at 9600 bps
+  Serial.begin(9600);           
   Serial.println("Motor test!");
   
-  motor.setSpeed(255);     // set the speed to 200/255
+  motor.setSpeed(255);   
 }
 
 void loop() {
   Serial.print("tick");
   
-  motor.run(FORWARD);      // turn it on going forward
+  motor.run(FORWARD);      
   delay(400);
 
   Serial.print("tack");
-  motor.run(RELEASE);      // stopped
+  motor.run(RELEASE);     
   delay(100);
 
   
   Serial.print("tock");
-  motor.run(BACKWARD);     // the other way
+  motor.run(BACKWARD);     
   delay(400);
   
   Serial.print("tack");
-  motor.run(RELEASE);      // stopped
+  motor.run(RELEASE);    
   delay(100);
 }
