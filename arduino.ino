@@ -1,31 +1,25 @@
 #include <AFMotor.h>
-//This is just a test to see if the setup works
+//This simple script needs to be uploaded to the arduino for the program to work
+
 
 AF_DCMotor motor(1, MOTOR12_64KHZ); 
-
+int incomingByte;  
 void setup() {
-  Serial.begin(9600);           
-  Serial.println("Motor test!");
-  
-  motor.setSpeed(255);   
+  Serial.begin(9600);          
+  motor.setSpeed(255);     
 }
 
 void loop() {
-  Serial.print("tick");
-  
-  motor.run(FORWARD);      
-  delay(400);
-
-  Serial.print("tack");
-  motor.run(RELEASE);     
-  delay(100);
-
-  
-  Serial.print("tock");
-  motor.run(BACKWARD);     
-  delay(400);
-  
-  Serial.print("tack");
-  motor.run(RELEASE);    
-  delay(100);
+  if (Serial.available() > 0) {
+    incomingByte = Serial.read();
+    if (incomingByte == 'F') {
+      motor.run(FORWARD);
+    }
+    if (incomingByte == 'N') {
+      motor.run(RELEASE);
+    }
+    if (incomingByte == 'B') {
+       motor.run(BACKWARD);    
+    }
+  }
 }
